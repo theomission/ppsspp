@@ -1138,6 +1138,8 @@ std::string VertexDecoder::GetString(DebugShaderStringType stringType) {
 		return std::string(buffer);
 	case SHADER_STRING_SOURCE_CODE:
 		{
+			if (!jitted_)
+				return "Not compiled";
 			std::vector<std::string> lines;
 #if defined(ARM64)
 			lines = DisassembleArm64((const u8 *)jitted_, jittedSize_);
